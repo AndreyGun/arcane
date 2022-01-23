@@ -1,11 +1,13 @@
 import React from 'react';
-import UserList from './component/UserList/UserList';
+import UsersPage from './pages/UsersPage/UsersPage';
 
 const App = () => {
 
   return(
     <div>
-      <UserList />
+      {/* Header > Nav */}
+      <UsersPage />
+      {/* Footer > info */}
     </div>
   );
 };
