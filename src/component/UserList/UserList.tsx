@@ -4,14 +4,15 @@ import { Grid } from '@mui/material';
 import { IUser } from './UserList.types';
 
 interface UserListProps {
-    users: IUser[];
+    users: IUser[],
+    showInfo: (a: number) => void
 }
 
-const UserList: FC<UserListProps> = ({ users }) => {
+const UserList: FC<UserListProps> = ({ users, showInfo }) => {
     return (
         <Grid container sx={{ justifyContent: 'center' }} gap={2}>
             {users.map(user =>
-                <UserItem key={user.id} user={user} />
+                <UserItem key={user.id} user={user} showInfo={showInfo} />
             )}
         </Grid>
     );

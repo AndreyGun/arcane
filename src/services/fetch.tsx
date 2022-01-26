@@ -1,11 +1,19 @@
 
-export const USERS_URL: string = "https://jsonplaceholder.typicode.com/users?limit=10";
+export const USERS_URL: string = "https://jsonplaceholder.typicode.com/users";
 
 export async function fetchUsers(url: string = "https://jsonplaceholder.typicode.com/users?limit=10") {
     try {
         const res = await fetch(url)
-        const body = await res.json();
-        return body;
+        return await res.json();
+    } catch (e) {
+        alert(e)
+    }
+}
+
+export async function fetchUserId(userID: string | undefined) {
+    try {
+        const res = await fetch(USERS_URL + "/" + userID);
+        return await res.json();
     } catch (e) {
         alert(e)
     }
