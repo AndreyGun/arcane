@@ -1,40 +1,36 @@
-import React, { useState, useEffect } from 'react';
-import { Box } from '@mui/system';
-import { IUser } from '../../component/UserList/UserList.types';
+import React, { useState, useEffect, FC } from 'react';
 import { fetchUserId } from '../../services/fetch';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import Loading from '../../component/Loading/Loading';
+import { IUserDetails } from '../../component/UserItemDetails/UserItemDetails.types';
+import UserItemDetails from '../../component/UserItemDetails/UserItemDetails';
 
-const UserDetailsPage = () => {
-    const [user, setUser] = useState<IUser | null>(null);
+const UserDetailsPage: FC = () => {
+    const [user, setUser] = useState<IUserDetails | null>(null);
     const [loading, setLoading] = useState<boolean>(false);
-    const navigate = useNavigate();
     let params = useParams();
-    
-    
+
+
+    interface Props {
+        user: IUserDetails | null
+    }
+    const props:Props = {
+        user
+    }
     useEffect(() => {
         setLoading(true);
         fetchUserId(params.id)
-        .then( body => {
-            setUser(body);
-            setLoading(false);
-        })
+            .then(body => {
+                setUser(body);
+                setLoading(false);
+            })
     }, [params.id]);
-    
+
     if (loading) {
         return <Loading />
     }
-    return(
-        <Box>
-            <h1>User Details Page</h1>
-            <p>{user?.name}</p>
-            <p>{user?.email}</p>
-            <p>{user?.address?.street}</p>
-            <p>{user?.address?.city}</p>
-            <button
-             onClick={() => {navigate('/users');}}
-            >Back</button>
-        </Box>
+    return (
+        <UserItemDetails {...props} />
     );
 };
 
