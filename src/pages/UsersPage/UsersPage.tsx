@@ -1,20 +1,20 @@
-import React, { useEffect, useState, FC } from 'react';
+import React, { FC, useEffect } from 'react';
 import Loading from '../../component/Loading/Loading';
 import UserList from '../../component/UserList/UserList';
 import { IUser } from '../../types/usersTypes';
-import { fetchUsers } from '../../services/fetch';
 import { useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-
-
-
+import { useTypedSelector } from '../../hooks/useTypedSelector';
+import { getUsers } from '../../redux/action';
+import { useDispatch } from 'react-redux';
 
 const UsersPage: FC = () => {
-    const state = useSelector(state => state);
-    console.log(state);
+    const { users, loading } = useTypedSelector(state => state.users);
+    const dispatch = useDispatch();
 
-    const [users, setUsers] = useState<IUser[]>([]);
-    const [loading, setLoading] = useState<boolean>(false);
+    useEffect(() => {
+        dispatch(getUsers());
+    }, [dispatch]);
+
     const navigate = useNavigate();
 
     function showInfo(userID: number) {
@@ -29,15 +29,6 @@ const UsersPage: FC = () => {
         users,
         showInfo
     }
-
-    useEffect(() => {
-        setLoading(true);
-        fetchUsers()
-            .then(body => {
-                setUsers(body);
-                setLoading(false);
-            });
-    }, []);
 
 
     if (loading) {

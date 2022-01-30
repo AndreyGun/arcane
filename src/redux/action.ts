@@ -1,33 +1,20 @@
-import { GET_USERS, HIDE_LOADER, SHOW_LOADER } from "../helpers/constatns";
+import { Dispatch } from "react";
+import { fetchUsers } from "../services/fetch";
+import { GetUsersActionTypes, UserAction } from "./reducer/appReducer.types";
 
-export function showLoader() {
-    return {
-        type: SHOW_LOADER
+export function getUsers() {
+
+    return async (dispatch: Dispatch<UserAction>) => {
+        try {
+            dispatch({ type: GetUsersActionTypes.GET_USERS});
+            fetchUsers().then(body => {
+                dispatch({ type: GetUsersActionTypes.GET_USERS_SUCCESS, payload: body});
+            });
+
+        } catch (e) {
+            dispatch({ type: GetUsersActionTypes.GET_USERS_ERROR, payload: `${e}`});
+        }
+
+
     }
 }
-
-export function hideLoader() {
-    return {
-        type: HIDE_LOADER
-    }
-}
-// export function fetchPosts() {
-    
-//     return async dispatch => {
-//         try {
-//             dispatch(showLoader());
-//             const response = await fetch('https://jsonplaceholder.typicode.com/posts?_limit=5')
-//             const json = await response.json()
-    
-//             setTimeout(() => {
-//                 dispatch({ type: GET_USERS, payload: json });
-//                 dispatch(hideLoader());    
-//             }, 500);
-            
-//         } catch (e) {
-//             dispatch(hideLoader())
-//         }
-
-        
-//     }
-// }
