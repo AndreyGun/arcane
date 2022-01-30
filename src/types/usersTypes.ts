@@ -1,3 +1,15 @@
+export interface IUser {
+    id: number;
+    name: string;
+    email: string;
+    address: IAdress;
+}
+interface IAdress {
+    street: string;
+    city: string;
+}
+
+
 export interface IUserDetails {
     "id": number;
     "name": string;

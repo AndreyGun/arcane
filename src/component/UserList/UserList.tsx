@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import UserItem from '../UserItem/UserItem';
 import { Grid } from '@mui/material';
-import { IUser } from './UserList.types';
+import { IUser } from '../../types/usersTypes';
 
 interface UserListProps {
     users: IUser[],

@@ -1,7 +1,7 @@
 import { Box } from '@mui/material';
 import React, { FC } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { IUserDetails } from './UserItemDetails.types';
+import { IUserDetails } from '../../types/usersTypes';
 
 interface UserItemProps {
     user: IUserDetails | null

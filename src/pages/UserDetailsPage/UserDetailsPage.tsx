@@ -2,7 +2,7 @@ import React, { useState, useEffect, FC } from 'react';
 import { fetchUserId } from '../../services/fetch';
 import { useParams } from 'react-router-dom';
 import Loading from '../../component/Loading/Loading';
-import { IUserDetails } from '../../component/UserItemDetails/UserItemDetails.types';
+import { IUserDetails } from '../../types/usersTypes';
 import UserItemDetails from '../../component/UserItemDetails/UserItemDetails';
 
 const UserDetailsPage: FC = () => {

@@ -1,6 +1,5 @@
 import React from 'react';
 import {
-  BrowserRouter,
   Routes,
   Route,
 } from 'react-router-dom';
@@ -13,7 +12,7 @@ import UserDetailsPage from './pages/UserDetailsPage/UserDetailsPage';
 const App = () => {
 
   return (
-    <BrowserRouter>
+    <div>
       <Header />
       <Box p={2}>
         <Routes>
@@ -29,7 +28,7 @@ const App = () => {
           <Route path="*" element={<UsersPage />} />
         </Routes>
       </Box>
-    </BrowserRouter>
+    </div>
   );
 };
 

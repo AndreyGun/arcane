@@ -5,7 +5,7 @@ import {
   CardActionArea,
   Typography
 } from '@mui/material';
-import { IUser } from '../UserList/UserList.types';
+import { IUser } from '../../types/usersTypes';
 
 interface UserItemProps {
   user: IUser,
