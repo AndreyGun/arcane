@@ -10,7 +10,7 @@ export async function fetchUsers(url: string = "https://jsonplaceholder.typicode
     }
 }
 
-export async function fetchUserId(userID: string | undefined) {
+export async function fetchUserId(userID: number) {
     try {
         const res = await fetch(USERS_URL + "/" + userID);
         return await res.json();

@@ -5,7 +5,7 @@ import { IUser } from '../../types/usersTypes';
 import { useNavigate } from 'react-router-dom';
 import { useTypedSelector } from '../../hooks/useTypedSelector';
 import { getUsers } from '../../redux/action';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useStore } from 'react-redux';
 
 const UsersPage: FC = () => {
     const { users, loading } = useTypedSelector(state => state.users);

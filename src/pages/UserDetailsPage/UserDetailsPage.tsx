@@ -1,30 +1,30 @@
-import React, { useState, useEffect, FC } from 'react';
-import { fetchUserId } from '../../services/fetch';
+import React, { useEffect, FC } from 'react';
 import { useParams } from 'react-router-dom';
 import Loading from '../../component/Loading/Loading';
-import { IUserDetails } from '../../types/usersTypes';
+import { IUser } from '../../types/usersTypes';
 import UserItemDetails from '../../component/UserItemDetails/UserItemDetails';
+import { useDispatch, useStore } from 'react-redux';
+import { getUserById } from '../../redux/action/getUserById';
 
 const UserDetailsPage: FC = () => {
-    const [user, setUser] = useState<IUserDetails | null>(null);
-    const [loading, setLoading] = useState<boolean>(false);
     let params = useParams();
+    const dispatch = useDispatch();
 
-
+    const store = useStore().getState().users;
+    const { users, loading } = store;
+    const user: IUser | null = users.length ? users.filter((u: IUser) => u.id === Number(params.id))[0] : null;
     interface Props {
-        user: IUserDetails | null
+        user: IUser | null
     }
-    const props:Props = {
+    const props: Props = {
         user
     }
     useEffect(() => {
-        setLoading(true);
-        fetchUserId(params.id)
-            .then(body => {
-                setUser(body);
-                setLoading(false);
-            })
-    }, [params.id]);
+        if (!user) {
+            // TODO: add case to reducer
+            dispatch(getUserById(Number(params.id)));
+        }
+    }, [dispatch, params.id, user]);
 
     if (loading) {
         return <Loading />
@@ -35,3 +35,4 @@ const UserDetailsPage: FC = () => {
 };
 
 export default UserDetailsPage;
+

@@ -1,10 +1,10 @@
 import { Box } from '@mui/material';
 import React, { FC } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { IUserDetails } from '../../types/usersTypes';
+import { IUser } from '../../types/usersTypes';
 
 interface UserItemProps {
-    user: IUserDetails | null
+    user: IUser | null
 }
 
 const UserItemDetails: FC<UserItemProps> = ({ user }) => {

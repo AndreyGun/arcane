@@ -1,16 +1,4 @@
 export interface IUser {
-    id: number;
-    name: string;
-    email: string;
-    address: IAdress;
-}
-interface IAdress {
-    street: string;
-    city: string;
-}
-
-
-export interface IUserDetails {
     "id": number;
     "name": string;
     "username": string;
@@ -20,7 +8,6 @@ export interface IUserDetails {
     "address": IUserAdress;
     "company": IUserCompany;
 }
-
 interface IUserAdress {
     "street": string;
     "suite": string;
