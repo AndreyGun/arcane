@@ -8,6 +8,7 @@ export interface IUserState {
 export enum GetUsersActionTypes {
     GET_USERS = 'GET_USERS',
     GET_USERS_SUCCESS = 'GET_USERS_SUCCESS',
+    GET_USER_BY_ID = 'GET_USER_BY_ID',
     GET_USERS_ERROR = 'GET_USERS_ERROR',
 }
 interface GetUsersAction {
@@ -16,6 +17,10 @@ interface GetUsersAction {
 interface GetUsersSuccessAction {
     type: GetUsersActionTypes.GET_USERS_SUCCESS;
     payload: IUser[];
+}
+interface GetUserById {
+    type: GetUsersActionTypes.GET_USER_BY_ID;
+    payload: IUser;
 }
 interface GetUsersErrorAction {
     type: GetUsersActionTypes.GET_USERS_ERROR;
@@ -26,3 +31,4 @@ export type UserAction =
     GetUsersAction
     | GetUsersSuccessAction
     | GetUsersErrorAction
+    | GetUserById

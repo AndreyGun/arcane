@@ -1,4 +1,4 @@
-import { GetUsersActionTypes, IUserState, UserAction } from "./appReducer.types";
+import { GetUsersActionTypes, IUserState, UserAction } from "./usersReducer.types";
 
 
 
@@ -8,13 +8,15 @@ const initialState: IUserState = {
     error: null,
 }
 
-const appReducer = (state = initialState, action: UserAction): IUserState => {
+const usersReducer = (state = initialState, action: UserAction): IUserState => {
+    console.log("here2");
+    console.log(state);
     switch (action.type) {
         case GetUsersActionTypes.GET_USERS:
             return {
                 loading: true,
                 error: null,
-                users: []
+                users: [...state.users]
             }
         case GetUsersActionTypes.GET_USERS_SUCCESS:
             return {
@@ -22,15 +24,21 @@ const appReducer = (state = initialState, action: UserAction): IUserState => {
                 error: null,
                 users: action.payload
             }
+        case GetUsersActionTypes.GET_USER_BY_ID:
+            return {
+                loading: false,
+                error: null,
+                users: [...state.users, action.payload]
+            }
         case GetUsersActionTypes.GET_USERS_ERROR:
             return {
                 loading: false,
                 error: action.payload,
-                users: []
+                users: [...state.users]
             }
         default:
             return state;
     }
 }
 
-export default appReducer;
+export default usersReducer;

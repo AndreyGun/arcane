@@ -3,15 +3,17 @@ import { useParams } from 'react-router-dom';
 import Loading from '../../component/Loading/Loading';
 import { IUser } from '../../types/usersTypes';
 import UserItemDetails from '../../component/UserItemDetails/UserItemDetails';
-import { useDispatch, useStore } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { getUserById } from '../../redux/action/getUserById';
+import { useTypedSelector } from '../../hooks/useTypedSelector';
 
 const UserDetailsPage: FC = () => {
     let params = useParams();
     const dispatch = useDispatch();
 
-    const store = useStore().getState().users;
-    const { users, loading } = store;
+    const state = useTypedSelector( state => state.users );
+    const { users, loading } = state;
+    
     const user: IUser | null = users.length ? users.filter((u: IUser) => u.id === Number(params.id))[0] : null;
     interface Props {
         user: IUser | null
@@ -20,11 +22,14 @@ const UserDetailsPage: FC = () => {
         user
     }
     useEffect(() => {
+        console.log("user before: ", user);
+        
         if (!user) {
             // TODO: add case to reducer
             dispatch(getUserById(Number(params.id)));
+            console.log("user after: ", user);
         }
-    }, [dispatch, params.id, user]);
+    }, [dispatch, params.id]);
 
     if (loading) {
         return <Loading />

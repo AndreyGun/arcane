@@ -1,7 +1,7 @@
 
 export const USERS_URL: string = "https://jsonplaceholder.typicode.com/users";
 
-export async function fetchUsers(url: string = "https://jsonplaceholder.typicode.com/users?limit=10") {
+export async function fetchUsers(url: string = "https://jsonplaceholder.typicode.com/users?_limit=5") {
     try {
         const res = await fetch(url)
         return await res.json();

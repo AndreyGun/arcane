@@ -1,6 +1,6 @@
 import { Dispatch } from "react";
-import { fetchUsers } from "../services/fetch";
-import { GetUsersActionTypes, UserAction } from "./reducer/appReducer.types";
+import { fetchUsers } from "../../services/fetch";
+import { GetUsersActionTypes, UserAction } from "../reducer/usersReducer.types";
 
 export function getUsers() {
 
