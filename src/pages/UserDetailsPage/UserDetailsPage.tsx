@@ -11,9 +11,10 @@ const UserDetailsPage: FC = () => {
     let params = useParams();
     const dispatch = useDispatch();
 
-    const state = useTypedSelector( state => state.users );
-    const { users, loading } = state;
-    
+    // const store = useStore().getState().users;
+    const storeUseSelector = useTypedSelector(store => store.users);
+
+    const { users, loading } = storeUseSelector;
     const user: IUser | null = users.length ? users.filter((u: IUser) => u.id === Number(params.id))[0] : null;
     interface Props {
         user: IUser | null
@@ -23,7 +24,7 @@ const UserDetailsPage: FC = () => {
     }
     useEffect(() => {
         console.log("user before: ", user);
-        
+
         if (!user) {
             // TODO: add case to reducer
             dispatch(getUserById(Number(params.id)));
